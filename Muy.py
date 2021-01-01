@@ -51,24 +51,26 @@ rabbit = 0                  #common
 def clear():
     os.system('clear')
 
-if daysaleint == 1:
-    daysale = 'Fishing pole'
-if daysaleint == 2:
-    daysale = 'Mystery box'
-if daysaleint == 3:
-    daysale = 'Key'
-if daysaleint == 4:
-    daysale = 'Hunting rifle'
-if daysaleint == 5:
-    daysale = 'Pen'
-if daysaleint == 6:
-    daysale = 'Phone call'
-if daysaleint == 7:
-    daysale = 'Bait'
-if daysaleint == 8:
-    daysale = 'Ammunition'
-if daysaleint == 9:
-    daysale = 'Fire works'
+daysales=['Fishing pole', 'Mystery box', 'Key', 'Hunting rifle', 'Pen', 'Phone call', 'Bait', 'Ammunition', 'Fire works']
+daysale=daysales[daysaleint-1]
+#if daysaleint == 1:
+#    daysale = 'Fishing pole'
+#if daysaleint == 2:
+#    daysale = 'Mystery box'
+#if daysaleint == 3:
+#    daysale = 'Key'
+#if daysaleint == 4:
+#    daysale = 'Hunting rifle'
+#if daysaleint == 5:
+#    daysale = 'Pen'
+#if daysaleint == 6:
+#    daysale = 'Phone call'
+#if daysaleint == 7:
+#    daysale = 'Bait'
+#if daysaleint == 8:
+#    daysale = 'Ammunition'
+#if daysaleint == 9:
+#    daysale = 'Fire works'
 
 print('____________________________')
 print('============================')
