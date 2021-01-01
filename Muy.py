@@ -184,70 +184,98 @@ while play:
         print('| Todays offer:  |', daysale, '|', salepercent, '% ', str(round(a / (salepercent / 10))), 'coins  |')
     if do[0:3] == 'buy':
      #   print(do[4:len(do)])
-        if do[4:len(do)] == 'fishing pole' and coins >= 200:
-            print('Fishing pole bought')
-
-            fipole += 1
-            if daysaleint == 1:
-                coins -= (200 / (salepercent / 10))
-            else:
-                coins -= 200
-        elif do[4:len(do)] == 'fishing pole' and not coins >= 200:
-            print('You dont have enough money (', coins, '/ 200 )')
-        if (do[4:len(do)] == 'mystery box') and coins >= 75 or (do[4:len(do)] == 'box') and coins >= 75:
-            print('Mystery box bought')
-            mybox += 1
-            if daysaleint == 2:
-                coins -= (75 / (salepercent / 10))
-            else:
-                coins -= 75
-        elif do[4:len(do)] == 'mystery box' and not coins >= 75:
-            print('You dont have enough money (', coins, '/ 75 )')
-        if do[4:len(do)] == 'key' and coins >= 50:
-            print('Key bought')
-            keys += 1
-            if daysaleint == 3:
-                coins -= (50 / (salepercent / 10))
-            else:
-                coins -= 50
-        elif do[4:len(do)] == 'key' and not coins >= 50:
-            print('You dont have enough money (', coins, '/ 50 )')
-    if do[4:len(do)] == 'hunting rifle' and coins >= 250:
-        print('Hunting rifle bought')
-        huntri += 1
-        if daysaleint == 4:
-            coins -= (250 / (salepercent / 10))
+        item=do[4:len(do)]
+        items={'fishing pole': (b, 1), 'mystery box': (c, 1), 'key': (d, 1), 'hunting rifle': (e, 1),  'bait': (h, 3), 'ammonition': (i, 20), 'fireworks': (j, 3), 'pen': (f, 1), 'phone call': (g, 1)}
+        i_name=item
+        item=items.get(item)
+        if coins>=item[0]:
+            print(f'{i_name.capitalize()} bought')
+            coins-=item[0]
+            if i_name=='fishing pole':
+                fipole+=item[1]
+            if i_name=='mystery box':
+                mybox+=item[1]
+            if i_name=='key':
+                keys+=item[1]
+            if i_name=='hunting rifle':
+                huntri+=item[1]
+            if i_name=='bait':
+                bait+=item[1]
+            if i_name=='ammonition':
+                ammo+=item[1]
+            if i_name=='fireworks':
+                fiwork+=item[1]
+            if i_name=='pen':
+                pen+=item[1]
+            if i_name=='phone call':
+                phoca+=item[1]
+            coins-=item[0]
         else:
-            coins -= 250
-    elif do[4:len(do)] == 'hunting rifle' and not coins >= 250:
-        print('You dont have enough money (', coins, '/ 250 )')
-    if do[4:len(do)] == 'bait' and coins >= 25:
-        print('3x Bait bought')
-        bait += 3
-        if daysaleint == 7:
-            coins -= (25 / (salepercent / 10))
-        else:
-            coins -= 25
-    elif do[4:len(do)] == 'bait' and not coins >= 25:
-        print('You dont have enough money (', coins, '/ 25 )')
-    if do[4:len(do)] == 'ammunition' and coins >= 40:
-        print('20x Ammunition bought')
-        ammo += 20
-        if daysaleint == 8:
-            coins -= (40 / (salepercent / 10))
-        else:
-            coins -= 40
-    elif do[4:len(do)] == 'ammunition' and not coins >= 40:
-        print('You dont have enough money (', coins, '/ 40 )')
-    if do[4:len(do)] == 'fireworks' and coins >= 45:
-        print('3x Fireworks bought')
-        fiwork += 3
-        if daysaleint == 9:
-            coins -= (45 / (salepercent / 10))
-        else:
-            coins -= 45
-    elif do[4:len(do)] == 'fireworks' and not coins >= 45:
-        print('You dont have enough money (', coins, '/ 45 )')
+            print(f'You dont have enough money ({str(coins)}/ {str(item[0])} )')
+##        if do[4:len(do)] == 'fishing pole' and coins >= 200:
+##            print('Fishing pole bought')
+##
+##            fipole += 1
+##            if daysaleint == 1:
+##                coins -= (200 / (salepercent / 10))
+##            else:
+##                coins -= 200
+##        elif do[4:len(do)] == 'fishing pole' and not coins >= 200:
+##            print('You dont have enough money (', coins, '/ 200 )')
+##        if (do[4:len(do)] == 'mystery box') and coins >= 75 or (do[4:len(do)] == 'box') and coins >= 75:
+##            print('Mystery box bought')
+##            mybox += 1
+##            if daysaleint == 2:
+##                coins -= (75 / (salepercent / 10))
+##            else:
+##                coins -= 75
+##        elif do[4:len(do)] == 'mystery box' and not coins >= 75:
+##            print('You dont have enough money (', coins, '/ 75 )')
+##        if do[4:len(do)] == 'key' and coins >= 50:
+##            print('Key bought')
+##            keys += 1
+##            if daysaleint == 3:
+##                coins -= (50 / (salepercent / 10))
+##            else:
+##                coins -= 50
+##        elif do[4:len(do)] == 'key' and not coins >= 50:
+##            print('You dont have enough money (', coins, '/ 50 )')
+##        if do[4:len(do)] == 'hunting rifle' and coins >= 250:
+##            print('Hunting rifle bought')
+##            huntri += 1
+##            if daysaleint == 4:
+##                coins -= (250 / (salepercent / 10))
+##            else:
+##                coins -= 250
+##        elif do[4:len(do)] == 'hunting rifle' and not coins >= 250:
+##            print('You dont have enough money (', coins, '/ 250 )')
+##        if do[4:len(do)] == 'bait' and coins >= 25:
+##            print('3x Bait bought')
+##            bait += 3
+##            if daysaleint == 7:
+##                coins -= (25 / (salepercent / 10))
+##            else:
+##                coins -= 25
+##        elif do[4:len(do)] == 'bait' and not coins >= 25:
+##            print('You dont have enough money (', coins, '/ 25 )')
+##        if do[4:len(do)] == 'ammonition' and coins >= 40:
+##            print('20x Ammunition bought')
+##            ammo += 20
+##            if daysaleint == 8:
+##                coins -= (40 / (salepercent / 10))
+##            else:
+##                coins -= 40
+##        elif do[4:len(do)] == 'ammunition' and not coins >= 40:
+##            print('You dont have enough money (', coins, '/ 40 )')
+##        if do[4:len(do)] == 'fireworks' and coins >= 45:
+##            print('3x Fireworks bought')
+##            fiwork += 3
+##            if daysaleint == 9:
+##                coins -= (45 / (salepercent / 10))
+##            else:
+##                coins -= 45
+##        elif do[4:len(do)] == 'fireworks' and not coins >= 45:
+##            print('You dont have enough money (', coins, '/ 45 )')
 
 
 
