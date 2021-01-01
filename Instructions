@@ -1,0 +1,101 @@
+MUY - - -
+
+ Hi and welcome to muy.py, a game there you can buy, sell, fish, hunt, and much more.
+ This file are going to guide you thrue this game. . .
+
+ COMMANDS - - -
+
+ To do something you need to type som commands.
+ Here is some examples:
+
+ >>> fish
+ fishing. . .
+ You got 3x |Common fish|
+
+ >>> pang balloon
+ PANG!
+ Empty!
+
+ It is randomly what you get.
+ But you need something to. If you wan't to pang a balloon you need a balloon.
+ Here comes some information about the balloon:
+
+ BALLOON :
+ Rarity: uncommon
+ Requires: 1x balloon
+ Code: balloon
+ You can find it in |Mystery boxes|, buy it in the |shop| or
+
+
+ SHOP AND LIMITED SHOP - - -
+ You may wondering where you should buy everything you need.
+ In a shop ofcourse.
+ You only need to type |shop| and then this will pop up:
+
+ >>> shop
+ Going to shop. . .
+ _ _ _ _   S H O P   _ _ _ _
+ : Fishing pole           200 coins ( 0 )  <--- This means how many you have of them.
+ : Bait 3x          25 coins ( 0 )
+ : Mystery box            75 coins ( 1 )
+ : Key                     50 coins ( 0 )
+ : Hunting rifle          250 coins ( 0 )
+ : Ammunition 20x       40 coins ( 0 )
+ : Pen                     20 coins ( 0 )
+ : Phone call             20 coins ( 0 )
+ : Fireworks 3x             45 coins ( 0 )
+ :--------------------------------------:
+ | Todays offer:  | Phone call | 49 %  20 coins  | <---- This is a sale of day and will probably not appear when your run it next time.
+
+
+ START - - -
+
+ You are starting without any coins. But you start with 'box of the day' which is a |Mystery box|.
+
+ INVENTORY AND WALLET - - -
+
+ You are looking for your wallet to see how much money you have. And see what you have in your inventory.
+
+
+ JACK POT - - -
+
+
+ MYSTERY BOXES - - -
+
+
+
+ KEYS AND SHADY PHONE CALLS - - -
+
+
+
+ FISHING AND HUNTING - - -
+
+
+
+ ANIMALS - - -
+ There are 7 animals in this game:
+ Fox, rabbit, bear, duck, boar, unicorn,
+
+
+ FIREWORKS - - -
+
+
+ PENS - - -
+
+
+ LEGENDARY AND EPIC MOMENTS - - -
+
+
+
+
+ RISK AND PROFITS - - -
+
+
+
+ HOW TO WIN - - -
+
+
+
+
+
+
