@@ -2,54 +2,49 @@ import os
 import time
 import random
 
-
-
-
 a = 0
 
-fipole = 0                #rare
+fipole = 0  # rare
 mybox = 1
-keys = 0                    #common
-huntri = 0               #epic
-pen = 0                     #common
+keys = 0  # common
+huntri = 0  # epic
+pen = 0  # common
 phoca = 0
-coins = 0              #common
+coins = 0  # common
 daysaleint = random.randint(1, 9)
 salepercent = random.randint(18, 68)
 
-
- #values
+# values
 dia = 0
 gold = 0
 
-#Prices
+# Prices
 fi2 = 105
 ba1 = 15
 bait2 = 155
 am2 = 10
 
+balloon = 0  # uncommon
+aumo: int = 0  # rare
 
-balloon = 0                 #uncommon
-aumo: int = 0                 #rare
+ammo: int = 0  # uncommon
+fiwork: int = 0  # rare
+bait: int = 0  # uncommon
 
+cofish = 0  # common
+rafish = 0  # rare           tip: you can't get fishes in mystery boxes. You can only buy them in the shop.
+epfish = 0  # epic
 
-ammo: int = 0               #uncommon
-fiwork: int = 0                #rare
-bait: int = 0               #uncommon
+fox = 0  # common
+boar = 0  # rare
+duck = 0  # common
+bear = 0  # epic
+rabbit = 0  # common
 
-
-cofish = 0                  #common
-rafish = 0                  #rare           tip: you can't get fishes in mystery boxes. You can only buy them in the shop.
-epfish = 0                  #epic
-
-fox = 0                     #common
-boar = 0                    #rare
-duck = 0                    #common
-bear = 0                    #epic
-rabbit = 0                  #common
 
 def clear():
     os.system('clear')
+
 
 if daysaleint == 1:
     daysale = 'Fishing pole'
@@ -124,8 +119,6 @@ while play:
             else:
                 print('No idea to fish without fishing pole.')
 
-
-
     if do == 'shop':
         clear()
         b = 200
@@ -165,7 +158,6 @@ while play:
             a = 45
             j = round(a / (salepercent / 10))
 
-
         print('Going to shop. . .')
         # time.sleep(random.randint(2, 3))
         print('_ _ _ _   S H O P   _ _ _ _')
@@ -181,7 +173,7 @@ while play:
         print(':--------------------------------------:')
         print('| Todays offer:  |', daysale, '|', salepercent, '% ', str(round(a / (salepercent / 10))), 'coins  |')
     if do[0:3] == 'buy':
-     #   print(do[4:len(do)])
+        #   print(do[4:len(do)])
         if do[4:len(do)] == 'fishing pole' and coins >= 200:
             print('Fishing pole bought')
 
@@ -247,8 +239,6 @@ while play:
     elif do[4:len(do)] == 'fireworks' and not coins >= 45:
         print('You dont have enough money (', coins, '/ 45 )')
 
-
-
     if do == 'wallet' or do == 'inv':
         round(coins)
         print('Wallet: ', round(coins))
@@ -289,8 +279,6 @@ while play:
         if aumo >= 1:
             print('Automatic aim ammunition: ', aumo)
 
-
-
     if do == 'hunt':
         if huntri >= 1:
             if aumo >= 1:
@@ -306,7 +294,7 @@ while play:
                     print('PANG!')
                     print('Wow! You hit a target 500 meter away! You got a reward on 500 coins!')
                     duck += 4
-                elif ran == 3 or  ran == 4:
+                elif ran == 3 or ran == 4:
                     print('PANG!')
                     print('You shot a |Rabbit|')
                     rabbit += 1
@@ -354,7 +342,7 @@ while play:
                 ran = random.randint(1, 12)
                 if ran == 1 or ran == 2:
                     print('All animals were hiding')
-                elif ran == 3 or  ran == 4 or ran == 5:
+                elif ran == 3 or ran == 4 or ran == 5:
                     print('PANG!')
                     print('You shot a |Rabbit|')
                     rabbit += 1
@@ -376,18 +364,21 @@ while play:
                     fox += 1
                 elif ran == 11:
                     print('PANG!')
-                    print('Wow. . . you hit a robber that were running from the police. \nThe police gave you so much money that you can buy a new rifle.\nThey took all your rifles because killing a human.')
+                    print(
+                        'Wow. . . you hit a robber that were running from the police. \nThe police gave you so much money that you can buy a new rifle.\nThey took all your rifles because killing a human.')
                     coins += 300
                     huntri = 0
                 elif ran == 12:
-                    print('LEGENDARY MOMENT: \n An |Unicorn| came with a good advice,\n"Stop shoot animals".\nPANG!\nYou ignore that and killed the unicorn.\nThe unicorn took all your money, your rifle and then disapeared.')
+                    print(
+                        'LEGENDARY MOMENT: \n An |Unicorn| came with a good advice,\n"Stop shoot animals".\nPANG!\nYou ignore that and killed the unicorn.\nThe unicorn took all your money, your rifle and then disapeared.')
                     coins = 0
                     huntri = 0
 
             else:
                 ran = random.randint(0, 5)
                 if ran == 1:
-                    print('Hahaha. You think you have an air rifle. Shooting air is maybe good for the climate.\nTip:     Go to the |shop| and buy some |Ammunition|.')
+                    print(
+                        'Hahaha. You think you have an air rifle. Shooting air is maybe good for the climate.\nTip:     Go to the |shop| and buy some |Ammunition|.')
                 else:
                     print('No idea to fish without any bait.')
         else:
@@ -396,8 +387,6 @@ while play:
                 print('No idea to hunt without |Hunting rifle|.\nTip:     Go to the |shop| and buy one.')
             else:
                 print('No idea to hunt without |Hunting rifle|.')
-
-
 
     if do[0:4] == 'sell':
         #   print(do[4:len(do)])
@@ -518,8 +507,6 @@ while play:
         elif do[5:len(do)] == 'key' and keys >= 1:
             print('You dont own that item')
 
-
-
     if do == 'light firework' or do == 'use firework':
         if fiwork >= 1:
             fiwork -= 1
@@ -566,7 +553,6 @@ while play:
             a = 45
             j = round(a / (salepercent / 10))
 
-
         print('Going to shop. . .')
         # time.sleep(random.randint(2, 3))
         print('_ _ _ _ _   S H O P   _ _ _ _ _')
@@ -579,7 +565,7 @@ while play:
         print(':-----------------------------------------------------:')
         print('| Todays offer:  |', daysale, '|', salepercent, '% ', str(round(a / (salepercent / 10))), 'coins  |')
     if do[0:3] == 'buy':
-     #   print(do[4:len(do)])
+        #   print(do[4:len(do)])
         if do[4:len(do)] == 'fireworks2' and coins >= fi2:
             print('12x Fireworks bought')
 
@@ -641,7 +627,6 @@ while play:
         else:
             print('You dont own that item. Tip: go to the |limited shop| and buy one.')
 
-
     if do == 'open mystery box' or do == 'open box' or do == 'search box':
         if mybox >= 1:
             mybox -= 1
@@ -649,7 +634,7 @@ while play:
             time.sleep(2)
             print('You got:  ')
             time.sleep(1)
-            ran = random.randint(0, 3)              # ran = random.randint(1, 10)
+            ran = random.randint(0, 3)  # ran = random.randint(1, 10)
             if ran >= 1:
                 print(ran, 'x  |Bait|')
                 bait += ran
@@ -698,7 +683,6 @@ while play:
                 else:
                     print('JACK POT!\nYou got 1000 |COINS|!')
                     coins += 1000
-
 
     if do[0:8] == 'sell max' or do[0:8] == 'sell all':
         coins += rabbit * 25
@@ -760,7 +744,7 @@ while play:
         coins += rafish * 25
         coins += epfish * 45
 
-    if do[0:11] == 'sell fishes':
+    if do[0:11] == 'sell fish':
         duck = 0
         coins += cofish * 15
         coins += rafish * 25
@@ -771,89 +755,3 @@ while play:
         gold = 0
         coins += dia * 3000
         dia = 0
-
-    if do[0:5] == 'trash':
-        if do[6:len(do)] == 'fishing pole' and fipole >= 1:
-            print('|Fishing pole| trashed.')
-            fipole -= 1
-        elif do[6:len(do)] == 'fishing pole' and not fipole >= 1:
-            print('You dont own that item')
-
-    if do == 'trash all' or do == 'trash max':
-        do == input('Are you sure you want to trash max? (Except money)')
-        if do == 'Yes':
-            print('YEET! You trashed almost your life in a burning container')
-            fipole = 0
-            mybox = 0
-            keys = 0
-            huntri = 0
-            pen = 0
-            phoca = 0
-
-            balloon = 0
-            aumo: int = 0
-
-            ammo: int = 0
-            fiwork: int = 0
-            bait: int = 0
-
-            cofish = 0
-            rafish = 0
-            epfish = 0
-
-            fox = 0
-            boar = 0
-            duck = 0
-            bear = 0
-            rabbit = 0
-            print('BAAM! Youre now being poor again. I guess.')
-
-        else:
-            print('Phew, you are still rich. I guess.')
-
-    if do == 'trash everything' or do == 'execute poor' or do == 'restart' or do == 'die':
-        if input('If you type |yes| all your progress will be loosed.') == 'yes':
-            fipole = 0
-            mybox = 1
-            keys = 0
-            huntri = 0
-            pen = 0
-            phoca = 0
-            coins = 0
-
-            dia = 0
-            gold = 0
-
-
-            balloon = 0
-            aumo: int = 0
-
-            ammo: int = 0
-            fiwork: int = 0
-            bait: int = 0
-
-            cofish = 0
-            rafish = 0
-            epfish = 0
-
-            fox = 0
-            boar = 0
-            duck = 0
-            bear = 0
-            rabbit = 0
-            if do == 'die':
-                print('You died')
-            else:
-                print('You is so poor that you even dont own a mystery box. Dont type the code to get one -')
-                do = input('Code:   ')
-                if do == 'y3fif20':
-                    print('OH NO! YOU TYPE THE EXACLY CODE. YOU NEED TO RERUN THIS TO BE ABLE TO CLEAR THE GAME')
-                else:
-                    print('Phew! Here:')
-                    print('1x Mystery box')
-        else:
-            print('Phew! Near you been poor again. Or are you already?')
-
-
-
-
