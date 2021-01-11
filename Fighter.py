@@ -9,7 +9,9 @@ sword = 0
 swole = 1    #sword level
 bow = 0
 bowle = 0
-level = 1
+swohe = 1  # swohe = 0
+swohele = 1  # swohele = 0
+level = 4   # level = 1
 eneacc = 10
 
 print('The enemy is raiding our island! You need to stop them!')
@@ -32,7 +34,7 @@ while ingame:
     health = (level * 15) + 5
     eneacc = level * 15 - 10
     if level == 1:
-        eneacc = 60
+        eneacc = 20
     while fight:
         while pturn:
             print('Your turn')
@@ -43,10 +45,12 @@ while ingame:
             time.sleep(0.1)
             print('1 Stab with sword (' + str(swole * 5) + ')  level', swole)
             time.sleep(0.1)
-            print('2 Heal (' + str(level * 2) + ')')
+            print('2 Heal (' + str(level * 2) + ')  level', level)
+            if swohe >= 1:
+                print('3 Sword heal combo (', swohe, ')  level', swohele)
             do = input('')
             if do == '1':
-                ran = random.randint(1, (100 / (swole * 10)))
+                ran = random.randint(1, (100 / (swole * 20)))
                 if ran == 1:
                     ehealth -= swole * 5
                     print('You stabbed the enemy. He have now', ehealth, 'health')
@@ -59,6 +63,17 @@ while ingame:
                 print('Healed', level * 2, 'health')
                 eturn = 1
                 pturn = 0
+            if do == '3' and swohe <= 1:
+                ran = random.randint(1, round(100 / (swole * 20)))
+                if ran == 1:
+                    ehealth -= swohele * 5
+                    health += swohele
+                    print('You stabbed the enemy. He have now', ehealth, 'health and you healed', swohele, 'health')
+                else:
+                    health += swohele
+                    print('You missed but healed', swohele, 'health')
+                    eturn = 1
+                    pturn = 0
         if ehealth <= 0:
             swole += 1
             bowle += 1
@@ -66,7 +81,15 @@ while ingame:
             print('You got:')
             print('Sword level', swole)
             print('Bow level', bowle)
+            if level == 4:
+                swohe += 1
+                print('Sword heal combo (', swohele * 5, '&', level * 3 - swohele, ')')
+            if swohe >= 1:
+                print('Sword heal combo level', swohele)
+
             time.sleep(5)
+            pturn = 0
+            fight = 0
 
         while eturn:
             time.sleep(4)
@@ -81,6 +104,7 @@ while ingame:
             print('2 Shoot with bow (', level * 3 + 1, ')')
             time.sleep(0.1)
             print('3 Heal (', level * 2 - 1, ')')
+            time.sleep(2)
             ran = random.randint(1, 6)
             if ran == 1 or ran == 2:
                 ran = random.randint(1, eneacc / level * 10)
@@ -106,6 +130,9 @@ while ingame:
             print('The enemy killed you. Devolving level. . .')
             level -= 1
             time.sleep(5)
+            if level <= 0:
+                level = 1
+
 
 
 
