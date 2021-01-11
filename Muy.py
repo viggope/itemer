@@ -847,7 +847,7 @@ while play:
                 print('You is so poor that you even dont own a mystery box. Dont type the code to get one -')
                 do = input('Code:   ')
                 if do == 'y3fif20':
-                    print('OH NO! YOU TYPE THE EXACLY CODE. YOU NEED TO RERUN THIS TO BE ABLE TO CLEAR THE GAME')
+                    print('OH NO! YOU TYPE THE EXACTLY CODE. YOU NEED TO RERUN THIS TO BE ABLE TO CLEAR THE GAME')
                 else:
                     print('Phew! Here:')
                     print('1x Mystery box')
@@ -856,4 +856,11 @@ while play:
 
 
 
+    if do[0:4] == 'open':
+        #   print(do[4:len(do)])
+        if do[5:len(do)] == 'word scrambler':
+            print('Opening word scrambler. . .')
+            open('worder.py')
+            #print('YOU WONT BE ABLE TO GET OUT!')
+            import worder
 
