@@ -7,13 +7,13 @@ import random
 
 a = 0
 
-fipole = 0                #rare
+fipole = 1                #rare
 mybox = 1
 keys = 0                    #common
-huntri = 0               #epic
+huntri = 1               #epic
 pen = 0                     #common
 phoca = 0
-coins = 0              #common
+coins = 1000              #common
 daysaleint = random.randint(1, 9)
 salepercent = random.randint(18, 68)
 
@@ -680,7 +680,7 @@ while play:
                 print(ran, 'x  |Gold|')
                 gold += ran
                 time.sleep(1)
-            ran = random.randint(0, 3)
+            ran = random.randint(0, 5)
             if ran == 5:
                 print(ran, 'LEGENDARY MOMENT:\nYou got a |Diamond|')
                 dia += 1

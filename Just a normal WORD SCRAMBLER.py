@@ -17,3 +17,5 @@ while scramble:
             print(do[counter], end='\n')
             counter -= random.randint(-3, 3)
 
+
+
