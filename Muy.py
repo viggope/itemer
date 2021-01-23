@@ -7,13 +7,13 @@ import random
 
 a = 0
 
-fipole = 1                #rare
+fipole = 0                #rare
 mybox = 1
 keys = 0                    #common
-huntri = 1               #epic
+huntri = 0               #epic
 pen = 0                     #common
 phoca = 0
-coins = 1000              #common
+coins = 0              #common
 daysaleint = random.randint(1, 9)
 salepercent = random.randint(18, 68)
 
@@ -126,7 +126,7 @@ while play:
 
 
 
-    if do == 'shop':
+    if do == 'shop' or do == 'real shop':
         clear()
         b = 200
         c = 75
@@ -389,7 +389,7 @@ while play:
                 if ran == 1:
                     print('Hahaha. You think you have an air rifle. Shooting air is maybe good for the climate.\nTip:     Go to the |shop| and buy some |Ammunition|.')
                 else:
-                    print('No idea to fish without any bait.')
+                    print('No idea to hunt with air (without ammunition).')
         else:
             ran = random.randint(0, 5)
             if ran == 1:
@@ -765,6 +765,9 @@ while play:
         coins += cofish * 15
         coins += rafish * 25
         coins += epfish * 45
+        cofish = 0
+        rafish = 0
+        epfish = 0
 
     if do[0:11] == 'sell stones':
         coins += gold * 150
