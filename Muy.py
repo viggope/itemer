@@ -14,7 +14,7 @@ huntri = 0               #epic
 pen = 0                     #common
 phoca = 0
 coins = 0              #common
-daysaleint = random.randint(1, 9)
+daysaleint = random.randint(1, 10)
 salepercent = random.randint(18, 68)
 
 
@@ -28,7 +28,11 @@ ba1 = 15
 bait2 = 155
 am2 = 10
 
+#game hub
+tickets = 0
+limev = ['fish', 'anana']   #limited events
 
+#misc
 balloon = 0                 #uncommon
 aumo: int = 0                 #rare
 
@@ -47,6 +51,9 @@ boar = 0                    #rare
 duck = 0                    #common
 bear = 0                    #epic
 rabbit = 0                  #common
+
+
+
 
 def clear():
     os.system('clear')
@@ -69,6 +76,8 @@ if daysaleint == 8:
     daysale = 'Ammunition'
 if daysaleint == 9:
     daysale = 'Fire works'
+if daysaleint == 10:
+    daysale = 'Ticket to game hub'
 
 print('____________________________')
 print('============================')
@@ -137,6 +146,7 @@ while play:
         h = 25
         i = 40
         j = 45
+        k = 35
         if daysaleint == 1:
             a = 200
             b = round(a / (salepercent / 10))
@@ -164,6 +174,9 @@ while play:
         if daysaleint == 9:
             a = 45
             j = round(a / (salepercent / 10))
+        if daysaleint == 10:
+            a = 35
+            k = round(a / (salepercent / 10))
 
 
         print('Going to shop. . .')
@@ -178,6 +191,7 @@ while play:
         print(': Pen                     ' + str(f) + ' coins (', pen, ')')
         print(': Phone call             ' + str(g) + ' coins (', phoca, ')')
         print(': Fireworks 3x             ' + str(j) + ' coins (', fiwork, ')')
+        print(': Ticket to |game hub|             ' + str(k) + ' coins (', fiwork, ')')
         print(':--------------------------------------:')
         print('| Todays offer:  |', daysale, '|', salepercent, '% ', str(round(a / (salepercent / 10))), 'coins  |')
     if do[0:3] == 'buy':
@@ -776,3 +790,33 @@ while play:
         dia = 0
 
     #if do[0:5] == 'trash':
+
+
+    if do == 'game hub':
+        limev = str(limev).split("', ''")
+        print('Entering game hub. . .')
+        print('U L T I M A T E   M U L T I   G A M E   H U B')
+        print('–––––––––––––––––––––––––––––––––––––––––––––––0')
+        print('C U R R E N T   G A M E S:')
+        print(': Bet and get             ')
+        print(': Hit the target          ')
+        print(': Duck hunt')
+        print(': Math maker')
+        print('–––––––––––––––––––––––––––––––––––––––––––––––0')
+        print('L I M I T E D   T I M E   E V E N T S:')
+        if len(limev) <= 1:
+            print('None current events available')
+        else:
+            print("\n".join(limev))
+        print('')
+        print(':-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:')
+        if tickets <= 0:
+            print('You need tickets to enter a game')
+
+        print('To buy a ticket, type |buy ticket|')
+        if mybox >= 1 or tickets >= 1 :
+            print('You can win tickets in the games, or you can found them in |mystery box|')
+        else:
+            print('Type |enter <game>| to jump into a game ')
+        print(':-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:')
+        print(' V V V V V V V V V V V V V V V V ')
