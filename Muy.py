@@ -8,7 +8,7 @@ import random
 a = 0
 
 fipole = 0                #rare
-mybox = 1
+mybox = 10
 keys = 0                    #common
 huntri = 0               #epic
 pen = 0                     #common
@@ -29,8 +29,14 @@ bait2 = 155
 am2 = 10
 
 #game hub
-tickets = 0
-limev = ['fish', 'anana']   #limited events
+tickets = 1
+limev = []   #limited events
+iq = 0
+gamescore = 0
+adress = 'Game hub.muy'
+
+#game prices
+mathearn = [50, 100, 150]
 
 #misc
 balloon = 0                 #uncommon
@@ -51,6 +57,11 @@ boar = 0                    #rare
 duck = 0                    #common
 bear = 0                    #epic
 rabbit = 0                  #common
+
+#advanced
+true = True
+false = False
+
 
 
 
@@ -260,6 +271,15 @@ while play:
             coins -= 45
     elif do[4:len(do)] == 'fireworks' and not coins >= 45:
         print('You dont have enough money (', coins, '/ 45 )')
+    if do[4:len(do)] == 'ticket' and coins >= 35:
+        print('1x Ticket bought')
+        tickets += 1
+        if daysaleint == 10:
+            coins -= (35 / (salepercent / 10))
+        else:
+            coins -= 35
+    elif do[4:len(do)] == 'ticket' and not coins >= 35:
+        print('You dont have enough money (', coins, '/ 35 )')
 
 
 
@@ -302,6 +322,8 @@ while play:
             print('Balloons: ', balloon)
         if aumo >= 1:
             print('Automatic aim ammunition: ', aumo)
+        if tickets >= 1:
+            print('Tickets: ', tickets)
 
 
 
@@ -699,6 +721,11 @@ while play:
                 print(ran, 'LEGENDARY MOMENT:\nYou got a |Diamond|')
                 dia += 1
                 time.sleep(1)
+            ran = random.randint(0, 4)
+            if ran == 1:
+                print(ran, '1x |Ticket|')
+                tickets += 1
+                time.sleep(1)
             ran = random.randint(0, 7)
             if ran == 7:
                 if fipole == 0:
@@ -789,8 +816,86 @@ while play:
         coins += dia * 3000
         dia = 0
 
-    #if do[0:5] == 'trash':
+    if do[0:5] == 'trash':
+        if do[6:len(do)] == 'fishing pole' and fipole >= 1:
+            print('|Fishing pole| trashed.')
+            fipole -= 1
+        elif do[6:len(do)] == 'fishing pole' and not fipole >= 1:
+            print('You dont own that item')
 
+    if do == 'trash all' or do == 'trash max':
+        do == input('Are you sure you want to trash max? (Except money)')
+        if do == 'Yes':
+            print('YEET! You trashed almost your life in a burning container')
+            fipole = 0
+            mybox = 0
+            keys = 0
+            huntri = 0
+            pen = 0
+            phoca = 0
+
+            balloon = 0
+            aumo: int = 0
+
+            ammo: int = 0
+            fiwork: int = 0
+            bait: int = 0
+
+            cofish = 0
+            rafish = 0
+            epfish = 0
+
+            fox = 0
+            boar = 0
+            duck = 0
+            bear = 0
+            rabbit = 0
+            print('BAAM! Youre now being poor again. I guess.')
+
+        else:
+            print('Phew, you are still rich. I guess.')
+
+    if do == 'trash everything' or do == 'execute poor' or do == 'restart' or do == 'die':
+        if input('If you type |yes| all your progress will be loosed.') == 'yes':
+            fipole = 0
+            mybox = 1
+            keys = 0
+            huntri = 0
+            pen = 0
+            phoca = 0
+            coins = 0
+
+            dia = 0
+            gold = 0
+
+            balloon = 0
+            aumo: int = 0
+
+            ammo: int = 0
+            fiwork: int = 0
+            bait: int = 0
+
+            cofish = 0
+            rafish = 0
+            epfish = 0
+
+            fox = 0
+            boar = 0
+            duck = 0
+            bear = 0
+            rabbit = 0
+            if do == 'die':
+                print('You died')
+            else:
+                print('You is so poor that you even dont own a mystery box. Dont type the code to get one -')
+                do = input('Code:   ')
+                if do == 'y3fif20':
+                    print('OH NO! YOU TYPE THE EXACTLY CODE. YOU NEED TO RERUN THIS TO BE ABLE TO CLEAR THE GAME')
+                else:
+                    print('Phew! Here:')
+                    print('1x Mystery box')
+        else:
+            print('Phew! Near you become poor again. Or are you already?')
 
     if do == 'game hub':
         limev = str(limev).split("', ''")
@@ -801,7 +906,7 @@ while play:
         print(': Bet and get             ')
         print(': Hit the target          ')
         print(': Duck hunt')
-        print(': Math maker')
+        print(': Math maker        Earnings: 50 - 150 coins          price: 1 ticket')
         print('–––––––––––––––––––––––––––––––––––––––––––––––0')
         print('L I M I T E D   T I M E   E V E N T S:')
         if len(limev) <= 1:
@@ -820,3 +925,53 @@ while play:
             print('Type |enter <game>| to jump into a game ')
         print(':-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:')
         print(' V V V V V V V V V V V V V V V V ')
+
+    if do[0:5] == 'enter':
+        if do[6:len(do)] == 'math maker':
+            if tickets >= 1:
+                tickets -= 1
+                print('Joining math maker. . .')
+                print('Current IQ: ', iq)
+                print('Your Gamehub score: ', gamescore)
+                print('Tickets left: ', tickets)
+                print('Page: ', adress)
+                print('.- . -. .- . -. .- . -. .- . -.')
+                do = input('S Start a test\nB Back to hub\n')
+                if do == 's':
+                    q = 1
+                    while q <= 3:
+
+                        print('Question', q, 'of 3')
+                        a : int= int(random.randint(1, 100))
+                        b : int= int(random.randint(1, 100))
+                        c = int(input(str(a) + '+' + str(b)))
+                        if c == a + b:
+                            print('Correct!')
+                            if q == 3:
+                                print(' Y O U   W O N ! ')
+                                print('=================')
+                                print('You answered all \n questions correctly!')
+                                print('Earnings:')
+                                tickets += 1
+                                print('1x Ticket')
+                                iq = iq + random.randint(3, 9)
+                                print(str(iq) + 'x IQ')
+                                coins = coins + mathearn[random.randint(1, 3)]
+                                print(str(coins) + 'coins')
+                                gamescore += 25
+                                print('25x Score')
+                                q = 4
+                            else:
+                                q += 1
+
+                        else:
+                            print('Wrong. Try again later.')
+                            q = 4
+                    else:
+                        do = 'game hub'
+            else:
+                ran = random.randint(1, 5)
+                if ran == 1:
+                    print('You dont own any tickets. Tip:  Go to the |shop| and buy one.')
+                else:
+                    print('You dont own any tickets.')
