@@ -8,7 +8,7 @@ import random
 a = 0
 
 fipole = 0                #rare
-mybox = 10
+mybox = 1
 keys = 0                    #common
 huntri = 0               #epic
 pen = 0                     #common
@@ -27,15 +27,22 @@ fi2 = 105
 ba1 = 15
 bait2 = 155
 am2 = 10
+ti2 = 75
+
 
 #game hub
-tickets = 1
+tickets = 0
 limev = []   #limited events
 iq = 0
 gamescore = 0
 adress = 'Game hub.muy'
 
-#game prices
+#game hub values
+gambal = 0
+
+#game hub prices
+
+#game earnings
 mathearn = [50, 100, 150]
 
 #misc
@@ -63,6 +70,47 @@ true = True
 false = False
 
 
+## setup
+b = 200
+c = 75
+d = 50
+e = 250
+f = 20
+g = 100
+h = 25
+i = 40
+j = 45
+k = 35
+if daysaleint == 1:
+    a = 200
+    b = round(a / (salepercent / 10))
+if daysaleint == 2:
+    a = 75
+    c = round(a / (salepercent / 10))
+if daysaleint == 3:
+    a = 50
+    d = round(a / (salepercent / 10))
+if daysaleint == 4:
+    a = 250
+    e = round(a / (salepercent / 10))
+if daysaleint == 5:
+    a = 20
+    f = round(a / (salepercent / 10))
+if daysaleint == 6:
+    a = 100
+    g = round(a / (salepercent / 10))
+if daysaleint == 7:
+    a = 25
+    h = round(a / (salepercent / 10))
+if daysaleint == 8:
+    a = 40
+    i = round(a / (salepercent / 10))
+if daysaleint == 9:
+    a = 45
+    j = round(a / (salepercent / 10))
+if daysaleint == 10:
+    a = 35
+    k = round(a / (salepercent / 10))
 
 
 
@@ -148,46 +196,7 @@ while play:
 
     if do == 'shop' or do == 'real shop':
         clear()
-        b = 200
-        c = 75
-        d = 50
-        e = 250
-        f = 20
-        g = 100
-        h = 25
-        i = 40
-        j = 45
-        k = 35
-        if daysaleint == 1:
-            a = 200
-            b = round(a / (salepercent / 10))
-        if daysaleint == 2:
-            a = 75
-            c = round(a / (salepercent / 10))
-        if daysaleint == 3:
-            a = 50
-            d = round(a / (salepercent / 10))
-        if daysaleint == 4:
-            a = 250
-            e = round(a / (salepercent / 10))
-        if daysaleint == 5:
-            a = 20
-            f = round(a / (salepercent / 10))
-        if daysaleint == 6:
-            a = 100
-            g = round(a / (salepercent / 10))
-        if daysaleint == 7:
-            a = 25
-            h = round(a / (salepercent / 10))
-        if daysaleint == 8:
-            a = 40
-            i = round(a / (salepercent / 10))
-        if daysaleint == 9:
-            a = 45
-            j = round(a / (salepercent / 10))
-        if daysaleint == 10:
-            a = 35
-            k = round(a / (salepercent / 10))
+
 
 
         print('Going to shop. . .')
@@ -202,7 +211,7 @@ while play:
         print(': Pen                     ' + str(f) + ' coins (', pen, ')')
         print(': Phone call             ' + str(g) + ' coins (', phoca, ')')
         print(': Fireworks 3x             ' + str(j) + ' coins (', fiwork, ')')
-        print(': Ticket to |game hub|             ' + str(k) + ' coins (', fiwork, ')')
+        print(': Ticket to |game hub|             ' + str(k) + ' coins (', tickets, ')')
         print(':--------------------------------------:')
         print('| Todays offer:  |', daysale, '|', salepercent, '% ', str(round(a / (salepercent / 10))), 'coins  |')
     if do[0:3] == 'buy':
@@ -278,8 +287,12 @@ while play:
             coins -= (35 / (salepercent / 10))
         else:
             coins -= 35
+    elif do[4:len(do)] == 'ticket' and not iq >= tickets * 5:
+        print('You need more IQ to buy that item  (', iq, '/', tickets * 5, ')')
     elif do[4:len(do)] == 'ticket' and not coins >= 35:
         print('You dont have enough money (', coins, '/ 35 )')
+
+
 
 
 
@@ -603,7 +616,7 @@ while play:
             j = round(a / (salepercent / 10))
 
 
-        print('Going to shop. . .')
+        print('Going to limited shop. . .')
         # time.sleep(random.randint(2, 3))
         print('_ _ _ _ _   S H O P   _ _ _ _ _')
         print('  L I M I T E D   O F F E R S  ')
@@ -612,6 +625,7 @@ while play:
         print(': Balloon     code: balloon     ' + str(ba1) + ' coins (', balloon, ')')
         print(': Bait 15x     code: bait2     ' + str(bait2) + ' coins (', bait, ')')
         print(': Automatic aim ammo 3x     code: autoammo     ' + str(am2) + ' coins (', aumo, ')')
+        print(': Tickets 3x     code: ticket2     ' + str(ti2) + ' coins (', tickets, ')')
         print(':-----------------------------------------------------:')
         print('| Todays offer:  |', daysale, '|', salepercent, '% ', str(round(a / (salepercent / 10))), 'coins  |')
     if do[0:3] == 'buy':
@@ -653,12 +667,24 @@ while play:
 
         elif do[4:len(do)] == 'autoammo' and not coins >= am2:
             print('You dont have enough money (', coins, '/', am2, ')')
+        if do[4:len(do)] == 'ticket2' and coins >= ti2:
+            print('3x Tickets bought')
+
+            tickets += 3
+            coins -= ti2
+
+
+
+        elif do[4:len(do)] == 'ticket2' and not iq >= tickets * 5 * 3:
+            print('You need more IQ to buy that item  (', iq, '/', iq * 5 * 3, ')')
+        elif do[4:len(do)] == 'ticket2' and not coins >= ti2:
+            print('You dont have enough money (', coins, '/', ti2, ')')
 
     if do == 'pang balloon' or do == 'use balloon':
         if balloon >= 1:
             balloon -= 1
             print('PANG!')
-            ran = random.randint(1, 5)
+            ran = random.randint(1, 6)
             if ran == 1 or ran == 2:
                 print('Empty')
             if ran == 3:
@@ -723,7 +749,7 @@ while play:
                 time.sleep(1)
             ran = random.randint(0, 4)
             if ran == 1:
-                print(ran, '1x |Ticket|')
+                print('1x |Ticket|')
                 tickets += 1
                 time.sleep(1)
             ran = random.randint(0, 7)
@@ -905,15 +931,26 @@ while play:
         print('C U R R E N T   G A M E S:')
         print(': Bet and get             ')
         print(': Hit the target          ')
-        print(': Duck hunt')
-        print(': Math maker        Earnings: 50 - 150 coins          price: 1 ticket')
+        print(': Duck hunt               ')
+        print(': Math maker        Earnings: 50 - 150 coins          Price: 1 ticket')
         print('–––––––––––––––––––––––––––––––––––––––––––––––0')
         print('L I M I T E D   T I M E   E V E N T S:')
         if len(limev) <= 1:
             print('None current events available')
         else:
             print("\n".join(limev))
-        print('')
+        print('–––––––––––––––––––––––––––––––––––––––––––––––0')
+        print('H U B   W A L L E T')
+        print('IQ: ', iq)
+        print('Game score: ', gamescore)
+        print('Coins: ', coins)
+        print('Tickets: ', tickets)
+        print('–––––––––––––––––––––––––––––––––––––––––––––––0')
+        print('H U B   S H O P')
+        print(': 1x Ticket             ' + str(k) + ' coins (', tickets, ')       Requires: ', tickets * 5, 'IQ')
+        print(': Game ball             Costs: 25 Score   Requires: ', gambal * 10, 'IQ')
+        print(': 15x Coins             Costs: 15 Score   Requires: ', round(coins * 0.1), 'IQ')
+        print(': Calculator            Costs: 35 Score   Requires: ', round(iq / 5)), 'IQ'
         print(':-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:')
         if tickets <= 0:
             print('You need tickets to enter a game')
@@ -929,7 +966,6 @@ while play:
     if do[0:5] == 'enter':
         if do[6:len(do)] == 'math maker':
             if tickets >= 1:
-                tickets -= 1
                 print('Joining math maker. . .')
                 print('Current IQ: ', iq)
                 print('Your Gamehub score: ', gamescore)
@@ -938,6 +974,7 @@ while play:
                 print('.- . -. .- . -. .- . -. .- . -.')
                 do = input('S Start a test\nB Back to hub\n')
                 if do == 's':
+                    tickets -= 1
                     q = 1
                     while q <= 3:
 
@@ -956,8 +993,9 @@ while play:
                                 print('1x Ticket')
                                 iq = iq + random.randint(3, 9)
                                 print(str(iq) + 'x IQ')
-                                coins = coins + mathearn[random.randint(1, 3)]
-                                print(str(coins) + 'coins')
+                                ran = random.randint(1, 3)
+                                coins = int(coins) + int(mathearn[int(ran)])
+                                print(str(ran) + 'coins')
                                 gamescore += 25
                                 print('25x Score')
                                 q = 4
@@ -966,6 +1004,14 @@ while play:
 
                         else:
                             print('Wrong. Try again later.')
+                            if q == 2:
+                                gamescore += 5
+                                print('Earnings:\n5x Score')
+                            if q == 3:
+                                gamescore += 10
+                                print('Earnings:\n10x Score')
+                            elif q == 1:
+                                print('No scores for you')
                             q = 4
                     else:
                         do = 'game hub'
