@@ -2,73 +2,70 @@ import os
 import time
 import random
 
-
-
-
 a = 0
 
-fipole = 0                #rare
+fipole = 0  # rare
 mybox = 1
-keys = 0                    #common
-huntri = 0               #epic
-pen = 0                     #common
+keys = 0  # common
+huntri = 0  # epic
+pen = 0  # common
 phoca = 0
-coins = 0              #common
+coins = 0  # common
 daysaleint = random.randint(1, 10)
 salepercent = random.randint(18, 68)
 
-
- #values
+# values
 dia = 0
 gold = 0
 
-#Prices
+# Prices
 fi2 = 105
 ba1 = 15
 bait2 = 155
 am2 = 10
 ti2 = 75
 
-
-#game hub
+# game hub
 tickets = 0
-limev = []   #limited events
+limev = []  # limited events
 iq = 0
 gamescore = 0
 adress = 'Game hub.muy'
 
-#game hub values
+# game hub values
 gambal = 0
 
-#game hub prices
+# game hub prices
 
-#game earnings
+# suspect things
+plafig = 0  # plastic figure (probably made in china)
+
+# game earnings
 mathearn = [50, 100, 150]
 
-#misc
-balloon = 0                 #uncommon
-aumo: int = 0                 #rare
+# misc
+balloon = 0  # uncommon
+aumo: int = 0  # rare
 
+ammo: int = 0  # uncommon
+fiwork: int = 0  # rare
+bait: int = 0  # uncommon
 
-ammo: int = 0               #uncommon
-fiwork: int = 0                #rare
-bait: int = 0               #uncommon
+cofish = 0  # common
+rafish = 0  # rare           tip: you can't get fishes in mystery boxes. You can only fish them.
+epfish = 0  # epic
+trfish = 0  # rare
 
+fox = 0  # common
+boar = 0  # rare
+duck = 0  # common
+bear = 0  # epic
+rabbit = 0  # common
+zebra = 0  # common
 
-cofish = 0                  #common
-rafish = 0                  #rare           tip: you can't get fishes in mystery boxes. You can only buy them in the shop.
-epfish = 0                  #epic
-
-fox = 0                     #common
-boar = 0                    #rare
-duck = 0                    #common
-bear = 0                    #epic
-rabbit = 0                  #common
-
-#advanced
+# advanced
 true = True
 false = False
-
 
 ## setup
 b = 200
@@ -113,9 +110,9 @@ if daysaleint == 10:
     k = round(a / (salepercent / 10))
 
 
-
 def clear():
     os.system('clear')
+
 
 if daysaleint == 1:
     daysale = 'Fishing pole'
@@ -137,11 +134,13 @@ if daysaleint == 9:
     daysale = 'Fire works'
 if daysaleint == 10:
     daysale = 'Ticket to game hub'
-
+print('\n  .     .   ...    .     .')
+print('____________________________')
+print('_________ M  U  Y __________')
 print('____________________________')
 print('============================')
 print('Alternatives:')
-print('Fish')
+print('Fish, Sell, ')
 play = 1
 while play:
     do = input('>>> ')
@@ -151,7 +150,7 @@ while play:
                 bait -= 1
                 print('Fishing. . .')
                 time.sleep(random.randint(1, 3))
-                ran = random.randint(1, 10)
+                ran = random.randint(1, 11)
                 if ran == 1 or ran == 2 or ran == 3:
                     print('You missed')
                 elif ran == 4 or ran == 5:
@@ -164,14 +163,17 @@ while play:
                     print('You got an |EPIC FISH|')
                     epfish += 1
                 elif ran == 8:
+                    print('You got a |Tropic fish|')
+                    trfish += 1
+                elif ran == 9:
                     print('JACK POT! You got 5x |EPIC FISH|')
                     epfish += 5
-                elif ran == 9 and rafish >= 1:
+                elif ran == 10 and rafish >= 1:
                     print('Oh no! A cat stole all your fishes.\nTip: You should |sell| your fishes more often')
                     cofish = 0
                     rafish = 0
                     epfish = 0
-                elif ran == 10:
+                elif ran == 11:
                     print('EPIC MOMENT: A shark took your fishing pole. But he left a |Common fish|')
                     fipole -= 1
                     cofish += 1
@@ -192,12 +194,8 @@ while play:
             else:
                 print('No idea to fish without fishing pole.')
 
-
-
     if do == 'shop' or do == 'real shop':
         clear()
-
-
 
         print('Going to shop. . .')
         # time.sleep(random.randint(2, 3))
@@ -215,7 +213,7 @@ while play:
         print(':--------------------------------------:')
         print('| Todays offer:  |', daysale, '|', salepercent, '% ', str(round(a / (salepercent / 10))), 'coins  |')
     if do[0:3] == 'buy':
-     #   print(do[4:len(do)])
+        #   print(do[4:len(do)])
         if do[4:len(do)] == 'fishing pole' and coins >= 200:
             print('Fishing pole bought')
 
@@ -280,7 +278,7 @@ while play:
             coins -= 45
     elif do[4:len(do)] == 'fireworks' and not coins >= 45:
         print('You dont have enough money (', coins, '/ 45 )')
-    if do[4:len(do)] == 'ticket' and coins >= 35:
+    if do[4:len(do)] == 'ticket' and coins >= 35 and iq >= tickets * 5:
         print('1x Ticket bought')
         tickets += 1
         if daysaleint == 10:
@@ -292,9 +290,18 @@ while play:
     elif do[4:len(do)] == 'ticket' and not coins >= 35:
         print('You dont have enough money (', coins, '/ 35 )')
 
-
-
-
+    # game hub shop
+    if do[4:len(do)] == 'plastic figure' and gamescore >= 35:
+        print('1x Ticket bought')
+        tickets += 1
+        if daysaleint == 10:
+            coins -= (35 / (salepercent / 10))
+        else:
+            coins -= 35
+    elif do[4:len(do)] == 'plastic figure' and not iq >= tickets * 5:
+        print('You need more IQ to buy that item  (', iq, '/', tickets * 5, ')')
+    elif do[4:len(do)] == 'ticket' and not gamescore >= 35:
+        print('You dont have enough money (', coins, '/ 35 )')
 
     if do == 'wallet' or do == 'inv':
         round(coins)
@@ -338,8 +345,6 @@ while play:
         if tickets >= 1:
             print('Tickets: ', tickets)
 
-
-
     if do == 'hunt':
         if huntri >= 1:
             if aumo >= 1:
@@ -355,7 +360,7 @@ while play:
                     print('PANG!')
                     print('Wow! You hit a target 500 meter away! You got a reward on 500 coins!')
                     duck += 4
-                elif ran == 3 or  ran == 4:
+                elif ran == 3 or ran == 4:
                     print('PANG!')
                     print('You shot a |Rabbit|')
                     rabbit += 1
@@ -400,10 +405,10 @@ while play:
                 ammo -= 1
                 print('Hunting. . .')
                 time.sleep(2.5)
-                ran = random.randint(1, 12)
+                ran = random.randint(1, 14)
                 if ran == 1 or ran == 2:
                     print('All animals were hiding')
-                elif ran == 3 or  ran == 4 or ran == 5:
+                elif ran == 3 or ran == 4 or ran == 5:
                     print('PANG!')
                     print('You shot a |Rabbit|')
                     rabbit += 1
@@ -423,20 +428,26 @@ while play:
                     print('PANG!')
                     print('You shot an |Fox|')
                     fox += 1
-                elif ran == 11:
+                elif ran == 11 or ran == 12:
                     print('PANG!')
-                    print('Wow. . . you hit a robber that were running from the police. \nThe police gave you so much money that you can buy a new rifle.\nThey took all your rifles because killing a human.')
+                    print('You shot an |Zebra|')
+                elif ran == 13:
+                    print('PANG!')
+                    print(
+                        'Wow. . . you hit a robber that were running from the police. \nThe police gave you so much money that you can buy a new rifle.\nThey took all your rifles because killing a human.')
                     coins += 300
                     huntri = 0
-                elif ran == 12:
-                    print('LEGENDARY MOMENT: \n An |Unicorn| came with a good advice,\n"Stop shoot animals".\nPANG!\nYou ignore that and killed the unicorn.\nThe unicorn took all your money, your rifle and then disapeared.')
+                elif ran == 14:
+                    print(
+                        'LEGENDARY MOMENT: \n An |Unicorn| came with a good advice,\n"Stop shoot animals".\nPANG!\nYou ignore that and killed the unicorn.\nThe unicorn took all your money, your rifle and then disapeared.')
                     coins = 0
                     huntri = 0
 
             else:
                 ran = random.randint(0, 5)
                 if ran == 1:
-                    print('Hahaha. You think you have an air rifle. Shooting air is maybe good for the climate.\nTip:     Go to the |shop| and buy some |Ammunition|.')
+                    print(
+                        'Hahaha. You think you have an air rifle. Shooting air is maybe good for the climate.\nTip:     Go to the |shop| and buy some |Ammunition|.')
                 else:
                     print('No idea to hunt with air (without ammunition).')
         else:
@@ -445,8 +456,6 @@ while play:
                 print('No idea to hunt without |Hunting rifle|.\nTip:     Go to the |shop| and buy one.')
             else:
                 print('No idea to hunt without |Hunting rifle|.')
-
-
 
     if do[0:4] == 'sell':
         #   print(do[4:len(do)])
@@ -465,7 +474,7 @@ while play:
             cofish -= 1
 
             coins += 15
-        elif do[5:len(do)] == 'common fish' and cofish >= 1:
+        elif do[5:len(do)] == 'common fish' and not cofish >= 1:
             print('You dont own that item')
 
         if do[5:len(do)] == 'rare fish' and rafish >= 1:
@@ -474,7 +483,7 @@ while play:
             rafish -= 1
 
             coins += 25
-        elif do[5:len(do)] == 'rare fish' and rafish >= 1:
+        elif do[5:len(do)] == 'rare fish' and not rafish >= 1:
             print('You dont own that item')
 
         if do[5:len(do)] == 'epic fish' and epfish >= 1:
@@ -483,7 +492,16 @@ while play:
             epfish -= 1
 
             coins += 45
-        elif do[5:len(do)] == 'epic fish' and epfish >= 1:
+        elif do[5:len(do)] == 'epic fish' and not epfish >= 1:
+            print('You dont own that item')
+
+        if do[5:len(do)] == 'tropic fish' and trfish >= 1:
+            print('|Tropic fish| sold for 40 coins')
+
+            trfish -= 1
+
+            coins += 40
+        elif do[5:len(do)] == 'tropic fish' and not trfish >= 1:
             print('You dont own that item')
 
         if do[5:len(do)] == 'hunting rifle' and huntri >= 1:
@@ -492,7 +510,7 @@ while play:
             huntri -= 1
 
             coins += 110
-        elif do[5:len(do)] == 'hunting rifle' and huntri >= 1:
+        elif do[5:len(do)] == 'hunting rifle' and not huntri >= 1:
             print('You dont own that item')
 
         if do[5:len(do)] == 'rabbit' and rabbit >= 1:
@@ -501,7 +519,7 @@ while play:
             rabbit -= 1
 
             coins += 25
-        elif do[5:len(do)] == 'rabbit' and rabbit >= 1:
+        elif do[5:len(do)] == 'rabbit' and not rabbit >= 1:
             print('You dont own that item')
 
         if do[5:len(do)] == 'fox' and fox >= 1:
@@ -510,7 +528,7 @@ while play:
             fox -= 1
 
             coins += 20
-        elif do[5:len(do)] == 'fox' and fox >= 1:
+        elif do[5:len(do)] == 'fox' and not fox >= 1:
             print('You dont own that item')
 
         if do[5:len(do)] == 'boar' and boar >= 1:
@@ -519,7 +537,7 @@ while play:
             boar -= 1
 
             coins += 55
-        elif do[5:len(do)] == 'boar' and boar >= 1:
+        elif do[5:len(do)] == 'boar' and not boar >= 1:
             print('You dont own that item')
 
         if do[5:len(do)] == 'bear' and bear >= 1:
@@ -528,7 +546,7 @@ while play:
             bear -= 1
 
             coins += 75
-        elif do[5:len(do)] == 'bear' and bear >= 1:
+        elif do[5:len(do)] == 'bear' and not bear >= 1:
             print('You dont own that item')
 
         if do[5:len(do)] == 'duck' and duck >= 1:
@@ -537,7 +555,16 @@ while play:
             duck -= 1
 
             coins += 30
-        elif do[5:len(do)] == 'duck' and duck >= 1:
+        elif do[5:len(do)] == 'duck' and not duck >= 1:
+            print('You dont own that item')
+
+        if do[5:len(do)] == 'zebra' and zebra >= 1:
+            print('|Zebra| sold for 45 coins')
+
+            zebra -= 1
+
+            coins += 45
+        elif do[5:len(do)] == 'zebra' and not zebra >= 1:
             print('You dont own that item')
 
         if do[5:len(do)] == 'gold' and gold >= 1:
@@ -546,7 +573,7 @@ while play:
             gold -= 1
 
             coins += 150
-        elif do[5:len(do)] == 'gold' and gold >= 1:
+        elif do[5:len(do)] == 'gold' and not gold >= 1:
             print('You dont own that item')
 
         if do[5:len(do)] == 'diamond' and dia >= 1:
@@ -555,19 +582,17 @@ while play:
             dia -= 1
 
             coins += 3000
-        elif do[5:len(do)] == 'diamond' and dia >= 1:
+        elif do[5:len(do)] == 'diamond' and not dia >= 1:
             print('You dont own that item')
 
         if do[5:len(do)] == 'key' and keys >= 1:
-            print('|Diamond| sold for 3000 coins')
+            print('|Key| sold for 30 coins')
 
             keys -= 1
 
             coins += 30
-        elif do[5:len(do)] == 'key' and keys >= 1:
+        elif do[5:len(do)] == 'key' and not keys >= 1:
             print('You dont own that item')
-
-
 
     if do == 'light firework' or do == 'use firework':
         if fiwork >= 1:
@@ -615,7 +640,6 @@ while play:
             a = 45
             j = round(a / (salepercent / 10))
 
-
         print('Going to limited shop. . .')
         # time.sleep(random.randint(2, 3))
         print('_ _ _ _ _   S H O P   _ _ _ _ _')
@@ -629,7 +653,7 @@ while play:
         print(':-----------------------------------------------------:')
         print('| Todays offer:  |', daysale, '|', salepercent, '% ', str(round(a / (salepercent / 10))), 'coins  |')
     if do[0:3] == 'buy':
-     #   print(do[4:len(do)])
+        #   print(do[4:len(do)])
         if do[4:len(do)] == 'fireworks2' and coins >= fi2:
             print('12x Fireworks bought')
 
@@ -675,8 +699,9 @@ while play:
 
 
 
-        elif do[4:len(do)] == 'ticket2' and not iq >= tickets * 5 * 3:
-            print('You need more IQ to buy that item  (', iq, '/', iq * 5 * 3, ')')
+        elif do[4:len(do)] == 'ticket2' and not iq >= tickets * 15:
+            print('You need more IQ to buy that item  (', iq, '/', iq * 15, ')')
+
         elif do[4:len(do)] == 'ticket2' and not coins >= ti2:
             print('You dont have enough money (', coins, '/', ti2, ')')
 
@@ -703,7 +728,6 @@ while play:
         else:
             print('You dont own that item. Tip: go to the |limited shop| and buy one.')
 
-
     if do == 'open mystery box' or do == 'open box' or do == 'search box':
         if mybox >= 1:
             mybox -= 1
@@ -711,7 +735,7 @@ while play:
             time.sleep(2)
             print('You got:  ')
             time.sleep(1)
-            ran = random.randint(0, 3)              # ran = random.randint(1, 10)
+            ran = random.randint(0, 3)  # ran = random.randint(1, 10)
             if ran >= 1:
                 print(ran, 'x  |Bait|')
                 bait += ran
@@ -749,7 +773,7 @@ while play:
                 time.sleep(1)
             ran = random.randint(0, 4)
             if ran == 1:
-                print('1x |Ticket|')
+                print('1 x |Ticket|')
                 tickets += 1
                 time.sleep(1)
             ran = random.randint(0, 7)
@@ -765,7 +789,6 @@ while play:
                 else:
                     print('JACK POT!\nYou got 1000 |COINS|!')
                     coins += 1000
-
 
     if do[0:8] == 'sell max' or do[0:8] == 'sell all':
         coins += rabbit * 25
@@ -910,28 +933,26 @@ while play:
             duck = 0
             bear = 0
             rabbit = 0
-            if do == 'die':
-                print('You died')
-            else:
-                print('You is so poor that you even dont own a mystery box. Dont type the code to get one -')
-                do = input('Code:   ')
-                if do == 'y3fif20':
-                    print('OH NO! YOU TYPE THE EXACTLY CODE. YOU NEED TO RERUN THIS TO BE ABLE TO CLEAR THE GAME')
-                else:
-                    print('Phew! Here:')
-                    print('1x Mystery box')
         else:
             print('Phew! Near you become poor again. Or are you already?')
+    # if do == 'die':
+    #   print('You is so poor that you even dont own a mystery box. Dont type the code to get one -')
+    #  do = input('Code:   ')
+    # if do == 'y3fif20':
+    #    print('OH NO! YOU TYPE THE EXACTLY CODE. YOU NEED TO RERUN THIS TO BE ABLE TO CLEAR THE GAME')
+    # else:
+    #   print('Phew! Here:')
+    #  print('1x Mystery box')
 
-    if do == 'game hub':
+    if do == 'game hub' or do == 'enter game hub':
         limev = str(limev).split("', ''")
         print('Entering game hub. . .')
         print('U L T I M A T E   M U L T I   G A M E   H U B')
         print('–––––––––––––––––––––––––––––––––––––––––––––––0')
         print('C U R R E N T   G A M E S:')
-        print(': Bet and get             ')
-        print(': Hit the target          ')
-        print(': Duck hunt               ')
+        # print(': Bet and get             ')
+        # print(': Hit the target          ')
+        # print(': Duck hunt               ')
         print(': Math maker        Earnings: 50 - 150 coins          Price: 1 ticket')
         print('–––––––––––––––––––––––––––––––––––––––––––––––0')
         print('L I M I T E D   T I M E   E V E N T S:')
@@ -954,9 +975,8 @@ while play:
         print(':-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:')
         if tickets <= 0:
             print('You need tickets to enter a game')
-
-        print('To buy a ticket, type |buy ticket|')
-        if mybox >= 1 or tickets >= 1 :
+            print('To buy a ticket, type |buy ticket|')
+        if mybox >= 1 or tickets <= 1:
             print('You can win tickets in the games, or you can found them in |mystery box|')
         else:
             print('Type |enter <game>| to jump into a game ')
@@ -979,8 +999,8 @@ while play:
                     while q <= 3:
 
                         print('Question', q, 'of 3')
-                        a : int= int(random.randint(1, 100))
-                        b : int= int(random.randint(1, 100))
+                        a: int = int(random.randint(1, 100))
+                        b: int = int(random.randint(1, 100))
                         c = int(input(str(a) + '+' + str(b)))
                         if c == a + b:
                             print('Correct!')
@@ -995,7 +1015,7 @@ while play:
                                 print(str(iq) + 'x IQ')
                                 ran = random.randint(1, 3)
                                 coins = int(coins) + int(mathearn[int(ran)])
-                                print(str(ran) + 'coins')
+                                print(str(int(mathearn[int(ran)])) + 'x Coins')
                                 gamescore += 25
                                 print('25x Score')
                                 q = 4
@@ -1021,3 +1041,25 @@ while play:
                     print('You dont own any tickets. Tip:  Go to the |shop| and buy one.')
                 else:
                     print('You dont own any tickets.')
+    if do == 'use game ball':
+        if gambal >= 1:
+            print('Using game ball. . .')
+            ran = random.randint(1, 20)  # 20 different things can happen
+            if ran == 1 or ran == 2 or ran == 3:
+                print('You got 30 coins')
+            if ran == 4 or ran == 5 or ran == 6:
+                print('You had unluck and you didnt get anything.')
+            if ran == 7:
+                print('You got a plastic green figure, probably made in china. ')
+                plafig += 1
+            if ran == 8 or ran == 9:
+                print('You got a credit card on 100 coins!')
+                coins += 100
+            if ran == 10:
+                print('JACK POT! You got 3x tickets and a golden ingot!')
+                tickets += 3
+                gold += 1
+
+
+        else:
+            print('You dont own that item.')
