@@ -4,6 +4,13 @@ import random
 
 a = 0
 
+inventory = {"sellable": 
+{"fishing": 
+{"cofish": 0, "rafish": 0, "epfish": 0, "trfish": 0}, 
+"hunting": {"fox": 0, "boar": 0, "duck": 0, "bear": 0, "zebra": 0}
+}, 
+"unsellable": {"fipole": 0, "mybox": 1, "keys": 0, "huntri": 0, "pen": 0, "phoca": 0, "coins": 0, "balloon": 0, "aumo": 0, "ammo": 0, "fiwork": 0, "bait": 0, "plafig": 0, "tickets": 0}}#{"fipole": 0, "mybox": 1, "keys": 0, "huntri": 0, "pen": 0, "phoca": 0, "coins": 0, "balloon": 0, "aumo": 0, "ammo": 0, "fiwork": 0, "bait": 0}
+"""
 fipole = 0  # rare
 mybox = 1
 keys = 0  # common
@@ -11,6 +18,7 @@ huntri = 0  # epic
 pen = 0  # common
 phoca = 0
 coins = 0  # common
+"""
 daysaleint = random.randint(1, 10)
 salepercent = random.randint(18, 68)
 
@@ -26,23 +34,30 @@ am2 = 10
 ti2 = 75
 
 # game hub
+"""
 tickets = 0
+"""
 limev = []  # limited events
 iq = 0
 gamescore = 0
 adress = 'Game hub.muy'
 
+
 # game hub values
 gambal = 0
 
+
 # game hub prices
 
+"""
 # suspect things
 plafig = 0  # plastic figure (probably made in china)
+"""
 
 # game earnings
 mathearn = [50, 100, 150]
 
+"""
 # misc
 balloon = 0  # uncommon
 aumo: int = 0  # rare
@@ -62,6 +77,7 @@ duck = 0  # common
 bear = 0  # epic
 rabbit = 0  # common
 zebra = 0  # common
+"""
 
 # advanced
 true = True
@@ -113,7 +129,9 @@ if daysaleint == 10:
 def clear():
     os.system('clear')
 
-
+daysales_list = ["Fishing pole", "Mystery box", "Key", "Hunting rifle", "Pen", "Phone call", "Bait", "Fire works", "Ticket to game hub"]
+daysale = daysales_list[daysaleint-1]
+"""
 if daysaleint == 1:
     daysale = 'Fishing pole'
 if daysaleint == 2:
@@ -134,6 +152,403 @@ if daysaleint == 9:
     daysale = 'Fire works'
 if daysaleint == 10:
     daysale = 'Ticket to game hub'
+"""
+
+def fish():
+    global inventory 
+    inventory["unsellable"]["bait"] -= 1
+    print('Fishing. . .')
+    time.sleep(random.randint(1, 3))
+    ran = random.randint(1, 11)
+    if ran == 1 or ran == 2 or ran == 3:
+        print('You missed')
+    elif ran == 4 or ran == 5:
+        print('You got 3x |Common fish|')
+        inventory["sellable"]["cofish"] += 3
+    elif ran == 6:
+        print('You got a |Rare fish|')
+        inventory["sellable"]["rafish"] += 1
+    elif ran == 7:
+        print('You got an |EPIC FISH|')
+        inventory["sellable"]["epfish"] += 1
+    elif ran == 8:
+        print('You got a |Tropic fish|')
+        inventory["sellable"]["trfish"] += 1
+    elif ran == 9:
+        print('JACK POT! You got 5x |EPIC FISH|')
+        inventory["sellable"]["epfish"] += 5
+    elif ran == 10 and rafish >= 1:
+        print('Oh no! A cat stole all your fishes.\nTip: You should |sell| your fishes more often')
+        inventory["sellable"]["cofish"] = 0
+        inventory["sellable"]["rafish"] = 0
+        inventory["sellable"]["epfish"] = 0
+    elif ran == 11:
+        print('EPIC MOMENT: A shark took your fishing pole. But he left a |Common fish|')
+        inventory["sellable"]["fipole"] -= 1
+        inventory["sellable"]["cofish"] += 1
+    else:
+        print('You got 2x |Rare fishes|')
+        inventory["sellable"]["rafish"] += 2
+
+def show_shop():
+    global b,h,c,d,e,i,f,g,j,k, daysale, salepercent, inventory
+    print('Going to shop. . .')
+    # time.sleep(random.randint(2, 3))
+    print('_ _ _ _   S H O P   _ _ _ _')
+    print(': Fishing pole           ' + str(b) + ' coins (', inventory["unsellable"]["fipole"], ')')
+    print(': Bait 3x          ' + str(h) + ' coins (', inventory["unsellable"]["bait"], ')')
+    print(': Mystery box            ' + str(c) + ' coins (', inventory["unsellable"]["mybox"], ')')
+    print(': Key                     ' + str(d) + ' coins (', inventory["unsellable"]["keys"], ')')
+    print(': Hunting rifle          ' + str(e) + ' coins (', inventory["unsellable"]["huntri"], ')')
+    print(': Ammunition 20x       ' + str(i) + ' coins (', inventory["unsellable"]["ammo"], ')')
+    print(': Pen                     ' + str(f) + ' coins (', inventory["unsellable"]["pen"], ')')
+    print(': Phone call             ' + str(g) + ' coins (', inventory["unsellable"]["phoca"], ')')
+    print(': Fireworks 3x             ' + str(j) + ' coins (', inventory["unsellable"]["fiwork"], ')')
+    print(': Ticket to |game hub|             ' + str(k) + ' coins (', inventory["unsellable"]["tickets"], ')')
+    print(':--------------------------------------:')
+    print('| Todays offer:  |', daysale, '|', salepercent, '% ', str(round(a / (salepercent / 10))), 'coins  |')
+
+def buy(thing: str):
+    global inventory, gamescore, salepercent, daysaleint
+    coins = inventory["unsellable"]["coins"]
+
+    # normal shop
+    if thing == 'fishing pole' and coins >= 200:
+        print('Fishing pole bought')
+
+        inventory["unsellable"]["fipole"] += 1
+        if daysaleint == 1:
+            coins -= (200 / (salepercent / 10))
+        else:
+            coins -= 200
+    elif thing == 'fishing pole' and not coins >= 200:
+        print('You dont have enough money (', coins, '/ 200 )')
+    if (thing == 'mystery box') and coins >= 75 or (thing == 'box') and coins >= 75:
+        print('Mystery box bought')
+        inventory["unsellable"]["mybox"] += 1
+        if daysaleint == 2:
+            coins -= (75 / (salepercent / 10))
+        else:
+            coins -= 75
+    elif thing == 'mystery box' and not coins >= 75:
+        print('You dont have enough money (', coins, '/ 75 )')
+    if thing == 'key' and coins >= 50:
+        print('Key bought')
+        inventory["unsellable"]["keys"] += 1
+        if daysaleint == 3:
+            coins -= (50 / (salepercent / 10))
+        else:
+            coins -= 50
+    elif thing == 'key' and not coins >= 50:
+        print('You dont have enough money (', coins, '/ 50 )')
+    if thing == 'hunting rifle' and coins >= 250:
+        print('Hunting rifle bought')
+        inventory["unsellable"]["huntri"] += 1
+        if daysaleint == 4:
+            coins -= (250 / (salepercent / 10))
+        else:
+            coins -= 250
+    elif thing == 'hunting rifle' and not coins >= 250:
+        print('You dont have enough money (', coins, '/ 250 )')
+    if thing == 'bait' and coins >= 25:
+        print('3x Bait bought')
+        inventory["unsellable"]["bait"] += 3
+        if daysaleint == 7:
+            coins -= (25 / (salepercent / 10))
+        else:
+            coins -= 25
+    elif thing == 'bait' and not coins >= 25:
+        print('You dont have enough money (', coins, '/ 25 )')
+    if thing == 'ammunition' and coins >= 40:
+        print('20x Ammunition bought')
+        inventory["unsellable"]["ammo"] += 20
+        if daysaleint == 8:
+            coins -= (40 / (salepercent / 10))
+        else:
+            coins -= 40
+    elif thing == 'ammunition' and not coins >= 40:
+        print('You dont have enough money (', coins, '/ 40 )')
+    if thing == 'fireworks' and coins >= 45:
+        print('3x Fireworks bought')
+        inventory["unsellable"]["fiwork"] += 3
+        if daysaleint == 9:
+            coins -= (45 / (salepercent / 10))
+        else:
+            coins -= 45
+    elif thing == 'fireworks' and not coins >= 45:
+        print('You dont have enough money (', coins, '/ 45 )')
+    if thing == 'ticket' and coins >= 35 and iq >= inventory["unsellable"]["tickets"] * 5:
+        print('1x Ticket bought')
+        inventory["unsellable"]["tickets"] += 1
+        if daysaleint == 10:
+            coins -= (35 / (salepercent / 10))
+        else:
+            coins -= 35
+    elif thing == 'ticket' and not iq >= inventory["unsellable"]["tickets"] * 5:
+        print('You need more IQ to buy that item  (', iq, '/', inventory["unsellable"]["tickets"] * 5, ')')
+    elif thing == 'ticket' and not coins >= 35:
+        print('You dont have enough money (', coins, '/ 35 )')
+
+
+    # game hub shop
+    if thing == 'plastic figure' and gamescore >= 35:
+        print('1x Ticket bought')
+        inventory["unsellable"]["plafig"] += 1
+        if daysaleint == 10:
+            coins -= (35 / (salepercent / 10))
+        else:
+            coins -= 35
+    elif thing == 'plastic figure' and not iq >= inventory["unsellable"]["tickets"] * 5:
+        print('You need more IQ to buy that item  (', iq, '/', inventory["unsellable"]["plafig"] * 5, ')')
+    elif thing == 'ticket' and not gamescore >= 35:
+        print('You dont have enough money (', gamescore, '/ 35 )')
+    
+
+    # limited shop
+
+def hunt():
+    global inventory
+    print('Hunting with auto ammunition. . .')
+    inventory["unsellable"]["aumo"] -= 1
+    time.sleep(2.6)
+    ran = random.randint(1, 10)
+    if ran == 1:
+        print('PANG!')
+        print('You hit a whole |Duck| family. (4)')
+        inventory["sellable"]["duck"] += 4
+    elif ran == 2:
+        print('PANG!')
+        print('Wow! You hit a target 500 meter away! You got a reward on 500 coins!')
+        inventory["sellable"]["duck"] += 4
+    elif ran == 3 or ran == 4:
+        print('PANG!')
+        print('You shot a |Rabbit|')
+        inventory["sellable"]["rabbit"] += 1
+    elif ran == 5:
+        print('PANG!')
+        print('You scoped at wrong direction. You shot yourself.')
+        for all in inventory["sellable"]:
+            inventory["sellable"][all] = 0
+        for all in inventory["unsellable"]:
+            inventory["unsellable"][all] = 0
+        """
+        coins = 0
+        duck = 0
+        rabbit = 0
+        boar = 0
+        fox = 0
+        bear = 0
+        cofish = 0
+        rafish = 0
+        epfish = 0
+        bait = 0
+        fipole = 0
+        huntri = 0
+        fiwork = 0
+        ammo = 0
+        key = 0
+        phoca = 0
+        pen = 0
+        mybox = 0
+        aumo = 0
+        """
+    elif ran == 6:
+        print('PANG!')
+        print('You shot a |Duck|')
+        inventory["sellable"]["duck"] += 1
+    elif ran == 7:
+        print('PANG!')
+        print('You shot an |BOAR|')
+        inventory["sellable"]["boar"] += 1
+    elif ran == 8:
+        print('PANG!')
+        print('You shot a EPIC |BEAR|')
+        inventory["sellable"]["bear"] += 1
+    elif ran == 9 or ran == 10:
+        print('PANG!')
+        print('You shot an |Fox|')
+        inventory["sellable"]["fox"] += 1
+
+def hunt_auto():
+    global inventory
+    print('Hunting. . .')
+    time.sleep(2.5)
+    ran = random.randint(1, 14)
+    if ran == 1 or ran == 2:
+        print('All animals were hiding')
+    elif ran == 3 or ran == 4 or ran == 5:
+        print('PANG!')
+        print('You shot a |Rabbit|')
+        inventory["sellable"]["rabbit"] += 1
+    elif ran == 6:
+        print('PANG!')
+        print('You shot a |Duck|')
+        inventory["sellable"]["duck"] += 1
+    elif ran == 7:
+        print('PANG!')
+        print('You shot a |BOAR|')
+        inventory["sellable"]["boar"] += 1
+    elif ran == 8:
+        print('PANG!')
+        print('You shot an EPIC |BEAR|')
+        inventory["sellable"]["bear"] += 1
+    elif ran == 9 or ran == 10:
+        print('PANG!')
+        print('You shot an |Fox|')
+        inventory["sellable"]["fox"] += 1
+    elif ran == 11 or ran == 12:
+        print('PANG!')
+        print('You shot an |Zebra|')
+        inventory["sellable"]["zebra"] += 1
+    elif ran == 13:
+        print('PANG!')
+        print(
+            'Wow. . . you hit a robber that were running from the police. \nThe police gave you so much money that you can buy a new rifle.\nThey took all your rifles because killing a human.')
+        inventory["unsellable"]["coins"] += 300
+        inventory["unsellable"]["huntri"] = 0
+    elif ran == 14:
+        print(
+            'LEGENDARY MOMENT: \n An |Unicorn| came with a good advice,\n"Stop shoot animals".\nPANG!\nYou ignore that and killed the unicorn.\nThe unicorn took all your money, your rifle and then disapeared.')
+        inventory["unsellable"]["coins"] = 0
+        inventory["unsellable"]["huntri"] = 0
+
+def sell(thing: str):
+    if do[5:len(do)] == 'fishing pole' and fipole >= 1:
+        print('|Fishing pole| sold for 75 coins')
+
+        fipole -= 1
+
+        coins += 75
+    elif do[5:len(do)] == 'fishing pole' and not fipole >= 1:
+        print('You dont own that item')
+
+
+    if do[5:len(do)] == 'common fish' and cofish >= 1:
+        print('|Common fish| sold for 15 coins')
+
+        cofish -= 1
+
+        coins += 15
+    elif do[5:len(do)] == 'common fish' and not cofish >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'rare fish' and rafish >= 1:
+        print('|Rare fish| sold for 25 coins')
+
+        rafish -= 1
+
+        coins += 25
+    elif do[5:len(do)] == 'rare fish' and not rafish >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'epic fish' and epfish >= 1:
+        print('|Epic fish| sold for 45 coins')
+
+        epfish -= 1
+
+        coins += 45
+    elif do[5:len(do)] == 'epic fish' and not epfish >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'tropic fish' and trfish >= 1:
+        print('|Tropic fish| sold for 40 coins')
+
+        trfish -= 1
+
+        coins += 40
+    elif do[5:len(do)] == 'tropic fish' and not trfish >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'hunting rifle' and huntri >= 1:
+        print('|Hunting rifle| sold for 110 coins')
+
+        huntri -= 1
+
+        coins += 110
+    elif do[5:len(do)] == 'hunting rifle' and not huntri >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'rabbit' and rabbit >= 1:
+        print('|Rabbit| sold for 25 coins')
+
+        rabbit -= 1
+
+        coins += 25
+    elif do[5:len(do)] == 'rabbit' and not rabbit >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'fox' and fox >= 1:
+        print('|Fox| sold for 20 coins')
+
+        fox -= 1
+
+        coins += 20
+    elif do[5:len(do)] == 'fox' and not fox >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'boar' and boar >= 1:
+        print('|Boar| sold for 55 coins')
+
+        boar -= 1
+
+        coins += 55
+    elif do[5:len(do)] == 'boar' and not boar >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'bear' and bear >= 1:
+        print('|Bear| sold for 75 coins')
+
+        bear -= 1
+
+        coins += 75
+    elif do[5:len(do)] == 'bear' and not bear >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'duck' and duck >= 1:
+        print('|Duck| sold for 30 coins')
+
+        duck -= 1
+
+        coins += 30
+    elif do[5:len(do)] == 'duck' and not duck >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'zebra' and zebra >= 1:
+        print('|Zebra| sold for 45 coins')
+
+        zebra -= 1
+
+        coins += 45
+    elif do[5:len(do)] == 'zebra' and not zebra >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'gold' and gold >= 1:
+        print('|Gold| sold for 150 coins')
+
+        gold -= 1
+
+        coins += 150
+    elif do[5:len(do)] == 'gold' and not gold >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'diamond' and dia >= 1:
+        print('|Diamond| sold for 3000 coins')
+
+        dia -= 1
+
+        coins += 3000
+    elif do[5:len(do)] == 'diamond' and not dia >= 1:
+        print('You dont own that item')
+
+    if do[5:len(do)] == 'key' and keys >= 1:
+        print('|Key| sold for 30 coins')
+
+        keys -= 1
+
+        coins += 30
+    elif do[5:len(do)] == 'key' and not keys >= 1:
+        print('You dont own that item')
+
 print('\n  .     .   ...    .     .')
 print('____________________________')
 print('_________ M  U  Y __________')
@@ -147,40 +562,7 @@ while play:
     if do == 'fish':
         if fipole >= 1:
             if bait >= 1:
-                bait -= 1
-                print('Fishing. . .')
-                time.sleep(random.randint(1, 3))
-                ran = random.randint(1, 11)
-                if ran == 1 or ran == 2 or ran == 3:
-                    print('You missed')
-                elif ran == 4 or ran == 5:
-                    print('You got 3x |Common fish|')
-                    cofish += 3
-                elif ran == 6:
-                    print('You got a |Rare fish|')
-                    rafish += 1
-                elif ran == 7:
-                    print('You got an |EPIC FISH|')
-                    epfish += 1
-                elif ran == 8:
-                    print('You got a |Tropic fish|')
-                    trfish += 1
-                elif ran == 9:
-                    print('JACK POT! You got 5x |EPIC FISH|')
-                    epfish += 5
-                elif ran == 10 and rafish >= 1:
-                    print('Oh no! A cat stole all your fishes.\nTip: You should |sell| your fishes more often')
-                    cofish = 0
-                    rafish = 0
-                    epfish = 0
-                elif ran == 11:
-                    print('EPIC MOMENT: A shark took your fishing pole. But he left a |Common fish|')
-                    fipole -= 1
-                    cofish += 1
-                else:
-                    print('You got 2x |Rare fishes|')
-                    rafish += 2
-
+                fish()
             else:
                 ran = random.randint(0, 5)
                 if ran == 1:
@@ -196,114 +578,18 @@ while play:
 
     if do == 'shop' or do == 'real shop':
         clear()
-
-        print('Going to shop. . .')
-        # time.sleep(random.randint(2, 3))
-        print('_ _ _ _   S H O P   _ _ _ _')
-        print(': Fishing pole           ' + str(b) + ' coins (', fipole, ')')
-        print(': Bait 3x          ' + str(h) + ' coins (', bait, ')')
-        print(': Mystery box            ' + str(c) + ' coins (', mybox, ')')
-        print(': Key                     ' + str(d) + ' coins (', keys, ')')
-        print(': Hunting rifle          ' + str(e) + ' coins (', huntri, ')')
-        print(': Ammunition 20x       ' + str(i) + ' coins (', ammo, ')')
-        print(': Pen                     ' + str(f) + ' coins (', pen, ')')
-        print(': Phone call             ' + str(g) + ' coins (', phoca, ')')
-        print(': Fireworks 3x             ' + str(j) + ' coins (', fiwork, ')')
-        print(': Ticket to |game hub|             ' + str(k) + ' coins (', tickets, ')')
-        print(':--------------------------------------:')
-        print('| Todays offer:  |', daysale, '|', salepercent, '% ', str(round(a / (salepercent / 10))), 'coins  |')
+        show_shop()
+        
     if do[0:3] == 'buy':
         #   print(do[4:len(do)])
-        if do[4:len(do)] == 'fishing pole' and coins >= 200:
-            print('Fishing pole bought')
-
-            fipole += 1
-            if daysaleint == 1:
-                coins -= (200 / (salepercent / 10))
-            else:
-                coins -= 200
-        elif do[4:len(do)] == 'fishing pole' and not coins >= 200:
-            print('You dont have enough money (', coins, '/ 200 )')
-        if (do[4:len(do)] == 'mystery box') and coins >= 75 or (do[4:len(do)] == 'box') and coins >= 75:
-            print('Mystery box bought')
-            mybox += 1
-            if daysaleint == 2:
-                coins -= (75 / (salepercent / 10))
-            else:
-                coins -= 75
-        elif do[4:len(do)] == 'mystery box' and not coins >= 75:
-            print('You dont have enough money (', coins, '/ 75 )')
-        if do[4:len(do)] == 'key' and coins >= 50:
-            print('Key bought')
-            keys += 1
-            if daysaleint == 3:
-                coins -= (50 / (salepercent / 10))
-            else:
-                coins -= 50
-        elif do[4:len(do)] == 'key' and not coins >= 50:
-            print('You dont have enough money (', coins, '/ 50 )')
-    if do[4:len(do)] == 'hunting rifle' and coins >= 250:
-        print('Hunting rifle bought')
-        huntri += 1
-        if daysaleint == 4:
-            coins -= (250 / (salepercent / 10))
-        else:
-            coins -= 250
-    elif do[4:len(do)] == 'hunting rifle' and not coins >= 250:
-        print('You dont have enough money (', coins, '/ 250 )')
-    if do[4:len(do)] == 'bait' and coins >= 25:
-        print('3x Bait bought')
-        bait += 3
-        if daysaleint == 7:
-            coins -= (25 / (salepercent / 10))
-        else:
-            coins -= 25
-    elif do[4:len(do)] == 'bait' and not coins >= 25:
-        print('You dont have enough money (', coins, '/ 25 )')
-    if do[4:len(do)] == 'ammunition' and coins >= 40:
-        print('20x Ammunition bought')
-        ammo += 20
-        if daysaleint == 8:
-            coins -= (40 / (salepercent / 10))
-        else:
-            coins -= 40
-    elif do[4:len(do)] == 'ammunition' and not coins >= 40:
-        print('You dont have enough money (', coins, '/ 40 )')
-    if do[4:len(do)] == 'fireworks' and coins >= 45:
-        print('3x Fireworks bought')
-        fiwork += 3
-        if daysaleint == 9:
-            coins -= (45 / (salepercent / 10))
-        else:
-            coins -= 45
-    elif do[4:len(do)] == 'fireworks' and not coins >= 45:
-        print('You dont have enough money (', coins, '/ 45 )')
-    if do[4:len(do)] == 'ticket' and coins >= 35 and iq >= tickets * 5:
-        print('1x Ticket bought')
-        tickets += 1
-        if daysaleint == 10:
-            coins -= (35 / (salepercent / 10))
-        else:
-            coins -= 35
-    elif do[4:len(do)] == 'ticket' and not iq >= tickets * 5:
-        print('You need more IQ to buy that item  (', iq, '/', tickets * 5, ')')
-    elif do[4:len(do)] == 'ticket' and not coins >= 35:
-        print('You dont have enough money (', coins, '/ 35 )')
-
-    # game hub shop
-    if do[4:len(do)] == 'plastic figure' and gamescore >= 35:
-        print('1x Ticket bought')
-        tickets += 1
-        if daysaleint == 10:
-            coins -= (35 / (salepercent / 10))
-        else:
-            coins -= 35
-    elif do[4:len(do)] == 'plastic figure' and not iq >= tickets * 5:
-        print('You need more IQ to buy that item  (', iq, '/', tickets * 5, ')')
-    elif do[4:len(do)] == 'ticket' and not gamescore >= 35:
-        print('You dont have enough money (', coins, '/ 35 )')
-
+        buy(do[4:len(do)])
     if do == 'wallet' or do == 'inv':
+        for unsell in inventory["unsellable"]:
+            print (unsell.capitalize()+": "+inventory["unsellable"][unsell])
+        
+        for sellable in inventory["sellable"]:
+            print (sellable.capitalize()+": "+inventory["sellable"][sellable])
+        """
         round(coins)
         print('Wallet: ', round(coins))
         if rabbit >= 1:
@@ -344,105 +630,15 @@ while play:
             print('Automatic aim ammunition: ', aumo)
         if tickets >= 1:
             print('Tickets: ', tickets)
+        """
 
     if do == 'hunt':
-        if huntri >= 1:
-            if aumo >= 1:
-                print('Hunting with auto ammunition. . .')
-                aumo -= 1
-                time.sleep(2.6)
-                ran = random.randint(1, 10)
-                if ran == 1:
-                    print('PANG!')
-                    print('You hit a whole |Duck| family. (4)')
-                    duck += 4
-                elif ran == 2:
-                    print('PANG!')
-                    print('Wow! You hit a target 500 meter away! You got a reward on 500 coins!')
-                    duck += 4
-                elif ran == 3 or ran == 4:
-                    print('PANG!')
-                    print('You shot a |Rabbit|')
-                    rabbit += 1
-                elif ran == 5:
-                    print('PANG!')
-                    print('You scoped at wrong direction. You shot yourself.')
-                    coins = 0
-                    duck = 0
-                    rabbit = 0
-                    boar = 0
-                    fox = 0
-                    bear = 0
-                    cofish = 0
-                    rafish = 0
-                    epfish = 0
-                    bait = 0
-                    fipole = 0
-                    huntri = 0
-                    fiwork = 0
-                    ammo = 0
-                    key = 0
-                    phoca = 0
-                    pen = 0
-                    mybox = 0
-                    aumo = 0
-                elif ran == 6:
-                    print('PANG!')
-                    print('You shot a |Duck|')
-                    duck += 1
-                elif ran == 7:
-                    print('PANG!')
-                    print('You shot an |BOAR|')
-                    boar += 1
-                elif ran == 8:
-                    print('PANG!')
-                    print('You shot a EPIC |BEAR|')
-                    bear += 1
-                elif ran == 9 or ran == 10:
-                    print('PANG!')
-                    print('You shot an |Fox|')
-            if ammo >= 1:
-                ammo -= 1
-                print('Hunting. . .')
-                time.sleep(2.5)
-                ran = random.randint(1, 14)
-                if ran == 1 or ran == 2:
-                    print('All animals were hiding')
-                elif ran == 3 or ran == 4 or ran == 5:
-                    print('PANG!')
-                    print('You shot a |Rabbit|')
-                    rabbit += 1
-                elif ran == 6:
-                    print('PANG!')
-                    print('You shot a |Duck|')
-                    duck += 1
-                elif ran == 7:
-                    print('PANG!')
-                    print('You shot a |BOAR|')
-                    boar += 1
-                elif ran == 8:
-                    print('PANG!')
-                    print('You shot an EPIC |BEAR|')
-                    bear += 1
-                elif ran == 9 or ran == 10:
-                    print('PANG!')
-                    print('You shot an |Fox|')
-                    fox += 1
-                elif ran == 11 or ran == 12:
-                    print('PANG!')
-                    print('You shot an |Zebra|')
-                elif ran == 13:
-                    print('PANG!')
-                    print(
-                        'Wow. . . you hit a robber that were running from the police. \nThe police gave you so much money that you can buy a new rifle.\nThey took all your rifles because killing a human.')
-                    coins += 300
-                    huntri = 0
-                elif ran == 14:
-                    print(
-                        'LEGENDARY MOMENT: \n An |Unicorn| came with a good advice,\n"Stop shoot animals".\nPANG!\nYou ignore that and killed the unicorn.\nThe unicorn took all your money, your rifle and then disapeared.')
-                    coins = 0
-                    huntri = 0
-
+        if inventory["unsellable"]["huntri"] >= 1:
+            if inventory["unsellable"]["aumo"] >= 1:
+                hunt()
+            if inventory["unsellable"]["ammo"] >= 1:
+                inventory["unsellable"]["ammo"] -= 1
+                hunt_auto()
             else:
                 ran = random.randint(0, 5)
                 if ran == 1:
@@ -459,140 +655,7 @@ while play:
 
     if do[0:4] == 'sell':
         #   print(do[4:len(do)])
-        if do[5:len(do)] == 'fishing pole' and fipole >= 1:
-            print('|Fishing pole| sold for 75 coins')
-
-            fipole -= 1
-
-            coins += 75
-        elif do[5:len(do)] == 'fishing pole' and not fipole >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'common fish' and cofish >= 1:
-            print('|Common fish| sold for 15 coins')
-
-            cofish -= 1
-
-            coins += 15
-        elif do[5:len(do)] == 'common fish' and not cofish >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'rare fish' and rafish >= 1:
-            print('|Rare fish| sold for 25 coins')
-
-            rafish -= 1
-
-            coins += 25
-        elif do[5:len(do)] == 'rare fish' and not rafish >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'epic fish' and epfish >= 1:
-            print('|Epic fish| sold for 45 coins')
-
-            epfish -= 1
-
-            coins += 45
-        elif do[5:len(do)] == 'epic fish' and not epfish >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'tropic fish' and trfish >= 1:
-            print('|Tropic fish| sold for 40 coins')
-
-            trfish -= 1
-
-            coins += 40
-        elif do[5:len(do)] == 'tropic fish' and not trfish >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'hunting rifle' and huntri >= 1:
-            print('|Hunting rifle| sold for 110 coins')
-
-            huntri -= 1
-
-            coins += 110
-        elif do[5:len(do)] == 'hunting rifle' and not huntri >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'rabbit' and rabbit >= 1:
-            print('|Rabbit| sold for 25 coins')
-
-            rabbit -= 1
-
-            coins += 25
-        elif do[5:len(do)] == 'rabbit' and not rabbit >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'fox' and fox >= 1:
-            print('|Fox| sold for 20 coins')
-
-            fox -= 1
-
-            coins += 20
-        elif do[5:len(do)] == 'fox' and not fox >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'boar' and boar >= 1:
-            print('|Boar| sold for 55 coins')
-
-            boar -= 1
-
-            coins += 55
-        elif do[5:len(do)] == 'boar' and not boar >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'bear' and bear >= 1:
-            print('|Bear| sold for 75 coins')
-
-            bear -= 1
-
-            coins += 75
-        elif do[5:len(do)] == 'bear' and not bear >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'duck' and duck >= 1:
-            print('|Duck| sold for 30 coins')
-
-            duck -= 1
-
-            coins += 30
-        elif do[5:len(do)] == 'duck' and not duck >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'zebra' and zebra >= 1:
-            print('|Zebra| sold for 45 coins')
-
-            zebra -= 1
-
-            coins += 45
-        elif do[5:len(do)] == 'zebra' and not zebra >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'gold' and gold >= 1:
-            print('|Gold| sold for 150 coins')
-
-            gold -= 1
-
-            coins += 150
-        elif do[5:len(do)] == 'gold' and not gold >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'diamond' and dia >= 1:
-            print('|Diamond| sold for 3000 coins')
-
-            dia -= 1
-
-            coins += 3000
-        elif do[5:len(do)] == 'diamond' and not dia >= 1:
-            print('You dont own that item')
-
-        if do[5:len(do)] == 'key' and keys >= 1:
-            print('|Key| sold for 30 coins')
-
-            keys -= 1
-
-            coins += 30
-        elif do[5:len(do)] == 'key' and not keys >= 1:
-            print('You dont own that item')
+        sell(do[5:len(do)])
 
     if do == 'light firework' or do == 'use firework':
         if fiwork >= 1:
