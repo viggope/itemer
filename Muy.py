@@ -125,6 +125,7 @@ if daysaleint == 10:
     a = 35
     k = round(a / (salepercent / 10))
 
+ran = '{Random Value}'
 
 def clear():
     os.system('clear')
@@ -1126,3 +1127,41 @@ while play:
 
         else:
             print('You dont own that item.')
+
+
+    if do == 'help':
+        print('_  _  _  _    H  E  L  P    _  _  _  _')
+        print('Commands: Fish, shop, limited shop, buy <item>, sell <item>, use <item>, enter <place>')
+        print('Never type a command with big letters')
+        #print('Number of items in inventory:')
+        print('For advanced help, type |Advanced help|')
+        print('––– –– –– –– –––––––––– –– –– –– –')
+        print(': - .                        . - :')
+    if do == 'advanced help' or do == 'adv help':
+        print('_  _  _  _    A D V A N C E D   H E L P    _  _  _  _')
+        print('Latest random output:', ran)
+        print('Daysale:', daysale)
+        print('Daysale int:', daysaleint)
+        print('In game?   ')
+        print('Coins:', coins)
+        print('Latest input:', do)
+        print('Mystery boxes:', mybox)
+        print('Game hub score:', gamescore)
+        print('Game hub IQ:', iq)
+        print('Game hub tickets', tickets)
+        print('Game hub limited events:', limev)
+        print('Game hub; Math earnings', mathearn)
+        print('^~----: : : : M  U  Y : : : :----~^')
+
+    if do == 'load':
+        print('LOADING...')
+        ran = random.randint(5, 15)
+        print('|', end= '')
+        for b in range(1, ran):
+            ran = random.randint(b*1, b*4)
+            print('–', end= '')
+            time.sleep(b/ran)
+        print('|')
+        print(sep= '\n')
+        print('LOADING COMPLETED')
+
